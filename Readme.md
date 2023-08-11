@@ -1,1 +1,1 @@
-Stack utilizzato : React Vite, Nodejs , mongodb, express, tailwind CSS , cloudinary
+Stack utilizzato : React Vite, Nodejs , mongodb, express, tailwind CSS , cloudinary, openAI api
