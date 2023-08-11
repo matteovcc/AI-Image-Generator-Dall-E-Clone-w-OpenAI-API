@@ -14,6 +14,35 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [searchText, setSearchText] = useState("prova");
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchPosts("http://localhost:8081/api/v1/post", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const result = await response.json();
+          setAllPosts(result.data.reverse());
+        }
+      } catch (error) {
+        alert(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  // const handleSearchChange = (e) => {
+  //   set
+  // }
+
   return (
     <section className="max-w-7x1 mx-auto">
       <div>
@@ -45,7 +74,10 @@ const Home = () => {
               {searchText ? (
                 <RenderCards data={[]} title="no search results found" />
               ) : (
-                <RenderCards data={[]} title="no posts found"></RenderCards>
+                <RenderCards
+                  data={allPosts}
+                  title="no posts found"
+                ></RenderCards>
               )}
             </div>
           </>
